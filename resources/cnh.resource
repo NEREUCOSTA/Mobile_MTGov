@@ -10,7 +10,7 @@ ${RENOVACAO_CNH}  //android.widget.TextView[@text="Solicitar renovação de CNH"
 ${RENOVACAO_CARTEIRA}  //*[(contains(@text, "Solicitar renovação de CNH"))]
 ${ACESSAR_SERVICO}    //android.widget.Button[@resource-id="cnh-carta-servico-acessar"]
 ${SOLICITAR_SEGUNDA_VIA}   //android.widget.Button[@text="Solicitar segunda via de CNH Reemite a segunda via da sua Carteira Nacional de Habilitação"]
-${EDITAR_CONTATO}  //android.view.View[@text="EDITAR"]
+${EDITAR_CONTATO}  //android.view.View[@resource-id="root"]/android.view.View[3]/android.widget.Button
 ${SALVAR_CONTATO}  //android.widget.Button[@text="SALVAR"]
 ${BTN_CONTINUAR}    //android.widget.Button[@resource-id="cnh-processo-continuar"]
 ${DADOS_CONDUTOR}  //android.widget.TextView[@text="Dados pessoais"]
@@ -18,8 +18,9 @@ ${BOTAO_CONTINUAR_PCD}  //android.widget.Button[@resource-id="cnh-processo-conti
 ${BOTAO_ATIVIDADE_REMUNERADO}   //android.widget.Button[@resource-id="cnh-processo-continuar"]
 ${BOTAO_CONTINUAR_FOTO}  //android.widget.Button[@resource-id="cnh-processo-continuar"]
 ${ADICIONAR_UNIDADE}  //android.widget.Button[@text="ADICIONAR UNIDADE"]
-${SELECIONAR_UNIDADE}  //android.app.Dialog/android.view.View/android.widget.RadioButton[1]
-${BOTAO_CONTINUAR_UNIDADE}  (//android.widget.Button[@text="CONTINUAR"])[2]
+${SELECIONAR_UNIDADE}   //android.app.Dialog/android.view.View/android.widget.RadioButton[2]
+#//android.app.Dialog/android.view.View/android.widget.RadioButton[2]
+${BOTAO_CONTINUAR_UNIDADE}  //android.widget.Button[@text="CONTINUAR"]
 ${BOTAO_CONTINUAR_INFORMACOES}  //android.widget.Button[@resource-id="cnh-processo-continuar"]
 
 *** Keywords ***
@@ -57,7 +58,7 @@ o app exibirá o texto andamento da renovacao de exames
 clicar na opcao renovacao de carteira
     Sleep    5s
     Wait Until Element Is Visible    //android.view.View[@resource-id="root"]/android.widget.Image  timeout=20s
-    Swipe    500    1500    500    500    5000
+    Swipe    500    1500    500    500    1000
     Wait Until Element Is Visible    ${RENOVACAO_CARTEIRA}
     Click Element    ${RENOVACAO_CARTEIRA}
 
@@ -69,16 +70,16 @@ clicar no botão acessar o servico
     Click Element    ${ACESSAR_SERVICO}
 
 clicar no botão editar contato renovacao
-    Sleep    5s
+    Sleep    10s
     #Wait Until Element Is Visible    //android.widget.TextView[@text="Dados do condutor"]
     Wait Until Element Is Visible    ${EDITAR_CONTATO} 
     Click Element    ${EDITAR_CONTATO}
     
 inserir o email renovacao
-    Sleep    6s
-    #Wait Until Element Is Visible    //android.widget.TextView[@text="Atualizar Contato"]
-    Wait Until Element Is Visible  //android.widget.EditText[@resource-id=":r6:"]
-    Click Element  //android.widget.EditText[@resource-id=":r6:"]
+    Sleep    10s
+    Wait Until Element Is Visible    //android.widget.TextView[@text="Atualizar Contato"]
+    Wait Until Element Is Visible  //android.widget.EditText[@resource-id="cnh-incluir-ear-atualizar-contato-email"]
+    Click Element  //android.widget.EditText[@resource-id="cnh-incluir-ear-atualizar-contato-email"]
     # Input Text   //android.widget.EditText[@resource-id=":r7:"]    nereuc@gmail.com
      
 clicar no botão salvar contato
@@ -104,7 +105,7 @@ clicar no botão continuar PCD
     
 
 clicar no botão continuar Atividade Remunerada
-    Wait Until Element Is Visible    (//android.widget.TextView[@text="Atividade Remunerada"])[2]
+    #Wait Until Element Is Visible    (//android.widget.TextView[@text="Atividade Remunerada"])[2]
     Sleep    10s
     Swipe    500    1600    500    400    1000
     Swipe    500    1900    500    100    1000
@@ -126,14 +127,14 @@ clicar no botão continuar foto
 
 
 clicar na opção adicionar unidade
-    Wait Until Element Is Visible    (//android.widget.TextView[@text="Outras Informações"])[2]
+    #Wait Until Element Is Visible    (//android.widget.TextView[@text="Outras Informações"])[2]
     Wait Until Element Is Visible   ${ADICIONAR_UNIDADE}
     Click Element    ${ADICIONAR_UNIDADE}
     Capture Page Screenshot   adicionar_unidade.png
 
 clicar na opção selecionar unidade
-    Wait Until Element Is Visible    //android.widget.TextView[@text="Unidades de atendimento"]
-    Wait Until Element Is Visible   ${SELECIONAR_UNIDADE}
+    #Wait Until Element Is Visible    //android.widget.TextView[@text="Unidades de atendimento"]
+    Wait Until Element Is Visible   ${SELECIONAR_UNIDADE}  timeout=10s
     Click Element   ${SELECIONAR_UNIDADE}
 
 clicar no botão continuar unidade

@@ -21,7 +21,7 @@ Cenario 2: Solicitar Renovação de Exame
     E clicar na opcao renovacao de carteira
     E clicar no botão acessar o servico
     E clicar no botão editar contato renovacao
-    #E inserir o email renovacao
+    E inserir o email renovacao
     E clicar no botão salvar contato
     E clicar no botão continuar
     E clicar no botão continuar PCD

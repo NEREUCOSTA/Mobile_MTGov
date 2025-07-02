@@ -2,7 +2,7 @@
 /Lib
 /Scripts
 /.venv
-/apps/app.apk
+#/apps/app.apk
 # /test_cases/*.html
 # /test_cases/output.xml
 # /test_cases/report.html
